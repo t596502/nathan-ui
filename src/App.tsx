@@ -2,6 +2,7 @@ import React from 'react';
 import Button from './components/Button'
 import Menu from './components/Menu/menu'
 import MenuItem from './components/Menu/menuItem'
+import SubItem from './components/Menu/subMenu'
 function App() {
   return (
     <div className="App">
@@ -12,9 +13,14 @@ function App() {
       <Button btnType='link' href='http://www.baidu.com' disabled>link-disabled</Button>
       <Button btnType='link' href='http://www.baidu.com'>link</Button>
 
-        <Menu onSelect={(val) => alert(val)} mode={"vertical"}>
-            <MenuItem  disabled>dasasda</MenuItem>
-            <MenuItem>2222</MenuItem>
+        <Menu defaultIndex={'0'} mode='horizontal' onSelect={(val)=>alert(val)}>
+            <MenuItem>dasasda</MenuItem>
+            <SubItem title={'text'}>
+                <MenuItem>2222</MenuItem>
+                <MenuItem>dasdas</MenuItem>
+                <MenuItem>dasdas大的</MenuItem>
+                <MenuItem>的撒大撒大苏打</MenuItem>
+            </SubItem>
             <MenuItem>dasasda2</MenuItem>
         </Menu>
     </div>
