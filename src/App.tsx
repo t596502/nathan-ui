@@ -3,6 +3,10 @@ import Button from './components/Button'
 import Menu from './components/Menu/menu'
 import MenuItem from './components/Menu/menuItem'
 import SubItem from './components/Menu/subMenu'
+import Icon from './components/Icon/icon'
+
+
+
 function App() {
   return (
     <div className="App">
@@ -12,8 +16,8 @@ function App() {
       <Button btnType='primary' disabled>disabled</Button>
       <Button btnType='link' href='http://www.baidu.com' disabled>link-disabled</Button>
       <Button btnType='link' href='http://www.baidu.com'>link</Button>
-
-        <Menu defaultIndex={'0'} mode='horizontal' onSelect={(val)=>alert(val)}>
+        <Icon icon='coffee' theme={'primary'} style={{fontSize:20}} />
+        <Menu defaultIndex={'0'} mode='vertical' onSelect={(val)=>alert(val)} >
             <MenuItem>dasasda</MenuItem>
             <SubItem title={'text'}>
                 <MenuItem>2222</MenuItem>
