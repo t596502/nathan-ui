@@ -3,11 +3,14 @@
 
 // mixin
 @import "mixin";
+
+//animation
+@import "_animation";
 // button
 @import "../components/Button/index.scss";
 
 
 //menu
 @import "../components/Menu/_style.scss";
-
+//icon
 @import "../components/Icon/icon.scss";

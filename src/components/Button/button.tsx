@@ -12,18 +12,22 @@ interface BaseButtonProps {
     /**设置 Button 的类型 */
     btnType?:ButtonType;
     children:React.ReactNode;
-    href?:string
+    href?:string,
+    onClick?:Function
 }
 
 
 const Button:FC<BaseButtonProps> = (props)=> {
-    const {className,disabled,size,btnType,children,href,...restProps} = props;
+    const {className,disabled,size,btnType,children,href,onClick,...restProps} = props;
 
     const classes= classNames('btn',className,{
         [`btn-${size}`]:size,
         [`btn-${btnType}`]:btnType,
         'disabled':btnType === 'link' && disabled
     });
+    const handleClick = ()=>{
+        if(onClick) onClick()
+    }
         if(btnType === 'link' && href){
             return (
                 <a className={classes}
@@ -35,6 +39,7 @@ const Button:FC<BaseButtonProps> = (props)=> {
             return (
                 <button disabled={disabled}
                         className={classes}
+                        onClick={handleClick}
                         {...restProps}
                 >
                     {children}

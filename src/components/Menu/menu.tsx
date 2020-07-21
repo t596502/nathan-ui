@@ -1,14 +1,13 @@
 import React,{useState,createContext} from 'react'
 import classNames from 'classnames'
 import {MenuItemProps} from './menuItem'
-
 type MenuMode = 'horizontal' | 'vertical'
 type SelectCallback = (selectedIndex:string)=>void;
 export interface MenuProps {
     defaultIndex? :string;
     className?:string
     mode?:MenuMode
-    style?:React.CSSProperties,
+    style?:React.CSSProperties
     onSelect?:SelectCallback
 
 }

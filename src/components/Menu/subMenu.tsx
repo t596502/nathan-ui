@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import {MenuContext} from './menu'
 import {MenuItemProps} from './menuItem'
 import Icon from '../Icon/icon';
-
+import Transition from '../Transition/transition'
 export interface SubMenuProps {
     index?:string;
     title:string;
@@ -53,9 +53,14 @@ const SubMenu:React.FC<SubMenuProps> = ({index,title,className,children})=>{
                 console.error('place write down MenuItem')
             }
         })
-        return <ul className={subMenuClasses}>
-            {element}
-        </ul>
+        return <Transition in={showSub} animation='zoom-in-top' timeout={300}>
+            <ul className={subMenuClasses}>
+                {element}
+            </ul>
+        </Transition>
+        // return<ul className={subMenuClasses}>
+        //         {element}
+        //     </ul>
     }
     return(
         <li key={index} className={classes} {...hoverEvent}>
