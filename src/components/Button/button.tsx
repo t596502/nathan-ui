@@ -1,4 +1,4 @@
-import React ,{FC}from 'react'
+import React ,{FC,ButtonHTMLAttributes}from 'react'
 import classNames from 'classnames'
 export type ButtonSize = 'lg' | 'sm'
 export type ButtonType = 'primary' | 'default' | 'danger' | 'link'
@@ -15,8 +15,9 @@ interface BaseButtonProps {
     href?:string
 }
 
+type NativeButtonProps = BaseButtonProps & ButtonHTMLAttributes<HTMLElement>
 
-const Button:FC<BaseButtonProps> = (props)=> {
+const Button:FC<NativeButtonProps> = (props)=> {
     const {className,disabled,size,btnType,children,href,...restProps} = props;
 
     const classes= classNames('btn',className,{
