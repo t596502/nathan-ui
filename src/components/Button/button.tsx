@@ -1,4 +1,4 @@
-import React ,{FC}from 'react'
+import React ,{FC,ButtonHTMLAttributes}from 'react'
 import classNames from 'classnames'
 export type ButtonSize = 'lg' | 'sm'
 export type ButtonType = 'primary' | 'default' | 'danger' | 'link'
@@ -16,18 +16,18 @@ interface BaseButtonProps {
     onClick?:Function
 }
 
+type NativeButtonProps = BaseButtonProps & ButtonHTMLAttributes<HTMLElement>
 
-const Button:FC<BaseButtonProps> = (props)=> {
-    const {className,disabled,size,btnType,children,href,onClick,...restProps} = props;
+
+const Button:FC<NativeButtonProps> = (props)=> {
+    const {className,disabled,size,btnType,children,href,...restProps} = props;
 
     const classes= classNames('btn',className,{
         [`btn-${size}`]:size,
         [`btn-${btnType}`]:btnType,
         'disabled':btnType === 'link' && disabled
     });
-    const handleClick = ()=>{
-        if(onClick) onClick()
-    }
+
         if(btnType === 'link' && href){
             return (
                 <a className={classes}
@@ -39,7 +39,6 @@ const Button:FC<BaseButtonProps> = (props)=> {
             return (
                 <button disabled={disabled}
                         className={classes}
-                        onClick={handleClick}
                         {...restProps}
                 >
                     {children}

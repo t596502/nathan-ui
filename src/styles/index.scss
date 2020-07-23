@@ -1,11 +1,12 @@
 // config
-@import "variables";
+@import "./variables";
 
 // mixin
 @import "mixin";
 
 //animation
 @import "_animation";
+
 // button
 @import "../components/Button/index.scss";
 
