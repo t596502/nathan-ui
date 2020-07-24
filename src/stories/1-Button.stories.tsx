@@ -2,7 +2,6 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import Button from '../components/Button/button';
 
-import '../styles/index.scss'
 export default {
   title: 'Button',
   component: Button,
