@@ -5,8 +5,17 @@ import MenuItem from './components/Menu/menuItem'
 import SubItem from './components/Menu/subMenu'
 import Transition from './components/Transition/transition'
 import Input from './components/Input/input'
-import AutoComplete from './components/AutoComplete/autoComplete'
+import AutoComplete,{DataSourceType} from './components/AutoComplete/autoComplete'
 
+interface LakerPlayerProps {
+    value: string;
+    number: number;
+}
+interface GithubUserProps {
+    login: string;
+    url: string;
+    avatar_url: string;
+}
 const ControlledInput = () => {
     const [value, setValue] = useState('')
     return <Input value={value} defaultValue={value} onChange={(e) => {
@@ -16,16 +25,54 @@ const ControlledInput = () => {
 
 const autoCpmpleteValue = ()=>{
     const lakers = ['bradley', 'pope', 'caruso', 'cook', 'cousins', 'james', 'AD', 'green', 'howard', 'kuzma', 'McGee', 'rando']
+    const lakersWithNumber = [
+      {value: 'bradley', number: 11},
+      {value: 'pope', number: 1},
+      {value: 'caruso', number: 4},
+      {value: 'cook', number: 2},
+      {value: 'cousins', number: 15},
+      {value: 'james', number: 23},
+      {value: 'AD', number: 3},
+      {value: 'green', number: 14},
+      {value: 'howard', number: 39},
+      {value: 'kuzma', number: 0},
+    ]
     const handleFetch = (query: string) => {
-        return lakers.filter(player => player.includes(query))
+        return fetch(`https://api.github.com/search/users?q=${query}`)
+            .then(res => res.json())
+            .then(({ items }) => {
+                if(!items.length) return []
+                return items.slice(0, 10).map((item: any) => ({ value: item.login, ...item}))
+            })
     }
+    // const handleFetch = (query: string) => {
+    //     return lakersWithNumber.filter(player => player.value.includes(query))
+    // }
     const handleSelect=(val:any)=>{
         console.log(val);
+    }
+    // const renderOption = (item:any)=>{
+    //     return (
+    //         <>
+    //             <h2>Name:{item.value}</h2>
+    //             <p>number:{item.number}</p>
+    //         </>
+    //     )
+    // }
+    const renderOption = (item: DataSourceType) => {
+      const itemWithGithub = item as DataSourceType<GithubUserProps>
+      return (
+        <>
+          <h2>Name: {itemWithGithub.value}</h2>
+          <p>url: {itemWithGithub.url}</p>
+        </>
+      )
     }
     return (
         <AutoComplete
             fetchSuggestions={handleFetch}
             onSelect={handleSelect}
+            renderOption={renderOption}
         />
     )
 }
