@@ -37,17 +37,17 @@ const autoCpmpleteValue = ()=>{
       {value: 'howard', number: 39},
       {value: 'kuzma', number: 0},
     ]
-    const handleFetch = (query: string) => {
-        return fetch(`https://api.github.com/search/users?q=${query}`)
-            .then(res => res.json())
-            .then(({ items }) => {
-                if(!items.length) return []
-                return items.slice(0, 10).map((item: any) => ({ value: item.login, ...item}))
-            })
-    }
     // const handleFetch = (query: string) => {
-    //     return lakersWithNumber.filter(player => player.value.includes(query))
+    //     return fetch(`https://api.github.com/search/users?q=${query}`)
+    //         .then(res => res.json())
+    //         .then(({ items }) => {
+    //             if(!items.length) return []
+    //             return items.slice(0, 10).map((item: any) => ({ value: item.login, ...item}))
+    //         })
     // }
+    const handleFetch = (query: string) => {
+        return lakersWithNumber.filter(player => player.value.includes(query))
+    }
     const handleSelect=(val:any)=>{
         console.log(val);
     }
@@ -69,11 +69,14 @@ const autoCpmpleteValue = ()=>{
       )
     }
     return (
-        <AutoComplete
-            fetchSuggestions={handleFetch}
-            onSelect={handleSelect}
-            renderOption={renderOption}
-        />
+        <div style={{width:400}}>
+            <AutoComplete
+                fetchSuggestions={handleFetch}
+                onSelect={handleSelect}
+                renderOption={renderOption}
+            />
+        </div>
+
     )
 }
 function App() {

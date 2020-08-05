@@ -5,6 +5,8 @@ import Icon from '../Icon/icon'
 import Transition from '../Transition/transition'
 
 import useDebounce from '../../hooks/useDebounce'
+import useClickOutside from '../../hooks/useClickOutside'
+
 interface DataSourceObject {
     value:string
 }
@@ -23,8 +25,10 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
     const [ loading, setLoading ] = useState(false)
     const [ showDropdown, setShowDropdown] = useState(false)
     const triggerSearch = useRef(false)
+    const componentRef = useRef<HTMLDivElement>(null)
     const [ highlightIndex, setHighlightIndex] = useState(-1)
     const debouncedValue = useDebounce(inputValue,1000)
+    useClickOutside(componentRef, () => { setSugestions([])})
     useEffect(()=>{
         if(debouncedValue && triggerSearch.current){
             const result = fetchSuggestions(debouncedValue)
@@ -83,7 +87,7 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
         triggerSearch.current = true
     }
     const handleSelect = (item:DataSourceType)=>{
-        setSugestions([])
+        setShowDropdown(false)
         setInputValue(item.value)
         if(onSelect){
             onSelect(item)
@@ -121,7 +125,7 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
         </Transition>
 
     }
-    return <div className="viking-auto-complete">
+    return <div className="viking-auto-complete" ref={componentRef}>
         <Input
             value={inputValue}
             onChange={handleChange}
