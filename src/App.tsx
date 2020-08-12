@@ -6,7 +6,7 @@ import SubItem from './components/Menu/subMenu'
 import Transition from './components/Transition/transition'
 import Input from './components/Input/input'
 import AutoComplete,{DataSourceType} from './components/AutoComplete/autoComplete'
-
+import Upload from './components/Upload/upload'
 interface LakerPlayerProps {
     value: string;
     number: number;
@@ -84,9 +84,22 @@ function App() {
     const hadnle = () => {
         setshowT(!showT)
     }
-
+    const onProgress = (data:any,file:any)=>{
+        console.log(data, file);
+    }
+    const onSuccess = (data:any,file:any)=>{
+        console.log(data, file);
+    }
+    const onError = (data:any,file:any)=>{
+        console.log(data, file);
+    }
     return (
         <div className="App">
+            <Upload action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                onProgress={onProgress}
+                onSuccess={onSuccess}
+                onError={onError}
+            ></Upload>
 
             {autoCpmpleteValue()}
 
