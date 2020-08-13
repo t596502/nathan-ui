@@ -7,6 +7,7 @@ import Transition from './components/Transition/transition'
 import Input from './components/Input/input'
 import AutoComplete,{DataSourceType} from './components/AutoComplete/autoComplete'
 import Upload from './components/Upload/upload'
+import { METHODS } from 'http';
 interface LakerPlayerProps {
     value: string;
     number: number;
@@ -93,12 +94,25 @@ function App() {
     const onError = (data:any,file:any)=>{
         console.log(data, file);
     }
+    const onChange = (file:File)=>{
+        console.log(file)
+    }
+    const checkSize = (file:File)=>{
+      if(Math.floor(file.size /1024) >50){
+        alert('the big size')
+        return false
+      }
+      return true
+    }
+    const filePromise = (file:File)=>{
+      const newFile = new File([file],'new_name',{type:file.type})
+      return Promise.resolve(newFile)
+    }
     return (
         <div className="App">
             <Upload action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                onProgress={onProgress}
-                onSuccess={onSuccess}
-                onError={onError}
+                onChange={onChange}
+                beforeUpload={filePromise}
             ></Upload>
 
             {autoCpmpleteValue()}

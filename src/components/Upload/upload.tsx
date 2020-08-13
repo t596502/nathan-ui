@@ -4,13 +4,15 @@ import Button from '../Button/button'
 
 export interface UploadProps {
   action:string;
+  beforeUpload?:(file:File) => boolean | Promise<File>;
+  onChange?:(file:File)=> void;
   onProgress?:(percentage:number,file:File) => void;
   onSuccess?:(data:any,file:File) =>void;
   onError?:(err:any,file:File) => void;
 }
 
 const Upload:FC<UploadProps> = (props) =>{
-  const {action,onProgress,onSuccess,onError} = props
+  const {action,onProgress,onSuccess,onError,onChange,beforeUpload} = props
   const fileInput = useRef<HTMLInputElement>(null);
 
   const handleClick = ()=>{
@@ -31,7 +33,23 @@ const Upload:FC<UploadProps> = (props) =>{
     const postFiles = Array.from(files)
 
     postFiles.forEach(file =>{
-      const formData = new FormData()
+       if(!beforeUpload){
+         post(file)
+       }else{
+         const result = beforeUpload(file);
+         if(result && result instanceof Promise){
+           result.then(processedFile=>{
+             post(processedFile)
+           })
+         }else if(result !== false){
+             post(file)
+             
+         }
+       }
+    })
+  }
+  const post = (file:File)=>{
+    const formData = new FormData()
       formData.append(file.name,file)
         axios.post(action,formData,{
           headers:{
@@ -39,7 +57,6 @@ const Upload:FC<UploadProps> = (props) =>{
           },
           onUploadProgress:(e)=>{
             let percentage = Math.round((e.loaded * 100) / e.total) || 0;
-            console.log(percentage);
             if(percentage < 100){
               if(onProgress) {
                 onProgress(percentage,file)
@@ -50,12 +67,17 @@ const Upload:FC<UploadProps> = (props) =>{
           if(onSuccess){
             onSuccess(resp.data,file)
           }
+          if(onChange){
+            onChange(file)
+          }
         }).catch(err=>{
           if(onError){
             onError(err,file)
           }
+          if(onChange){
+            onChange(file)
+          }
         })
-    })
   }
   return (
     <div
