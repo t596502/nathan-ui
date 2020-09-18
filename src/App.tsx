@@ -111,8 +111,8 @@ function App() {
     return (
         <div className="App">
             <Upload action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                onChange={onChange}
-                beforeUpload={filePromise}
+                    onChange={onChange}
+                    onError={onError}
             ></Upload>
 
             {autoCpmpleteValue()}
