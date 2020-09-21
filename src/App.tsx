@@ -113,7 +113,9 @@ function App() {
             <Upload action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                     onChange={onChange}
                     onError={onError}
-            ></Upload>
+            >
+                <Button btnType="primary">upload file</Button>
+            </Upload>
 
             {autoCpmpleteValue()}
 
