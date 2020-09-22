@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import Button from './components/Button'
-import Menu from './components/Menu/menu'
-import MenuItem from './components/Menu/menuItem'
-import SubItem from './components/Menu/subMenu'
+import Menu from './components/Menu/index'
+// import MenuItem from './components/Menu/menuItem'
+// import SubItem from './components/Menu/subMenu'
 import Transition from './components/Transition/transition'
 import Input from './components/Input/input'
 import AutoComplete,{DataSourceType} from './components/AutoComplete/autoComplete'
 import Upload from './components/Upload/upload'
 import { METHODS } from 'http';
+import SubMenu from "./components/Menu/subMenu";
 interface LakerPlayerProps {
     value: string;
     number: number;
@@ -144,14 +145,14 @@ function App() {
             />
             <ControlledInput/>
             <Menu defaultIndex={'0'} mode='vertical' onSelect={(val) => alert(val)}>
-                <MenuItem>dasasda</MenuItem>
-                <SubItem title={'text'}>
-                    <MenuItem>2222</MenuItem>
-                    <MenuItem>dasdas</MenuItem>
-                    <MenuItem>dasdas大的</MenuItem>
-                    <MenuItem>的撒大撒大苏打</MenuItem>
-                </SubItem>
-                <MenuItem>dasasda2</MenuItem>
+                <Menu.Item>dasasda</Menu.Item>
+                <Menu.SubMenu title={'text'}>
+                    <Menu.Item>2222</Menu.Item>
+                    <Menu.Item>dasdas</Menu.Item>
+                    <Menu.Item>dasdas大的</Menu.Item>
+                    <Menu.Item>的撒大撒大苏打</Menu.Item>
+                </Menu.SubMenu>
+                <Menu.Item>dasasda2</Menu.Item>
             </Menu>
 
         </div>
