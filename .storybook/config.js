@@ -14,4 +14,12 @@ const storyWrapper = (stroyFn) => (
     </div>
 )
 addDecorator(storyWrapper)
+addParameters({info:{inline:true,header:false}})
+const loaderFn = ()=>{
+    const allExports = [require('../src/welcome.stories.tsx')];
+    // const req = require.context('../src/components', true, /\.stories\.tsx$/);
+    // req.keys().forEach(fname => allExports.push(req(fname)));
+    return allExports;
+}
+configure(loaderFn, module);
 
