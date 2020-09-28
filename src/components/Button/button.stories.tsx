@@ -1,6 +1,7 @@
 import React from 'react';
 import {storiesOf} from "@storybook/react";
-import { action } from '@storybook/addon-actions';
+import {action} from '@storybook/addon-actions';
+
 import Button from './button';
 
 const defaultButton = () => (
@@ -21,14 +22,14 @@ const buttonWithType = () => (
     </>
 )
 
-const buttonDisabled = () =>(
+const buttonDisabled = () => (
     <>
         <Button btnType="primary" disabled>primary button</Button>
     </>
 )
-storiesOf('Button Component',module)
-.add('默认 Button',defaultButton)
-.add('不同尺寸的 Button',buttonWithSize)
-.add('不同类型的 Button', buttonWithType)
-.add('禁用的 Button', buttonDisabled)
+storiesOf('Button Component', module)
+    .add('Button', defaultButton)
+    .add('不同尺寸的 Button', buttonWithSize,)
+    .add('不同类型的 Button', buttonWithType)
+    .add('禁用的 Button', buttonDisabled)
 

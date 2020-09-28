@@ -36,6 +36,7 @@
   "devDependencies": {
     "@babel/core": "7.9.0",
     "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addons": "^5.3.19",
     "@storybook/react": "^5.3.19",
@@ -90,6 +91,7 @@
     "react": "^16.13.1",
     "react-app-polyfill": "^1.0.6",
     "react-dev-utils": "^10.2.1",
+    "react-docgen-typescript-loader": "^3.7.2",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "resolve": "1.15.0",
