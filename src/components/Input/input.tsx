@@ -21,7 +21,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, 'size
 
 }
 
-const Input : FC<InputProps> =(props)=>{
+export const Input : FC<InputProps> =(props)=>{
     const {
         disabled,
         size,
